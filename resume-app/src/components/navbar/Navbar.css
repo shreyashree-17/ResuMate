@@ -1,0 +1,44 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    height: 6rem;
+    right: 0;
+    width: 100%;
+    justify-content: space-around;
+    font-size: larger;
+    box-shadow: .2rem .2rem .5rem black;
+    background-color: rgb(18, 43, 64);
+    color: aliceblue;
+  }
+  
+  .nav--logo{
+    width: 37%;
+    max-width: 350px;
+    font-size: min(4vw, 30px);
+    font-weight: 700;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: rgb(238, 248, 248);
+
+  }
+  
+  .navigators{
+    width: 40%;
+    font-size: min(2vw, 1.0rem);
+    display: flex;
+    justify-content: space-around;
+    /* background-color: #222; */
+    gap: 1rem;
+    white-space: nowrap;
+  }
+  
+  .link {
+    color: var(--grey-500);
+  }
+  
+  .active {
+    color: var(--black);
+  }
+  
+  .link{
+    text-decoration: none;
+  }

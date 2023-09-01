@@ -1,0 +1,87 @@
+.resumes {
+  width: 100%;
+  display: flex; /* Change from flex to block to display cards vertically */
+  flex-direction: column; /* Change the flex direction to column */
+  gap: 20px;
+  position: relative;
+  top: -3rem;
+}
+
+.filter{
+  padding: 0;
+  margin: 0;
+  top:10px
+
+
+}
+
+.card-info{
+  display: flex;
+  flex-direction: row;
+  flex: 1.5;
+  gap: min(2vw, 10px);
+  justify-content: space-around;
+}
+.card {
+  box-shadow: 6px 6px 8px;
+  border-radius: 7px;
+  background-color: rgb(221, 236, 252);
+  display: flex;
+  flex-direction: row; /* Use flex to arrange card contents vertically */
+  gap: 10px; /* Adjust the gap between card elements */
+  padding: 10px; /* Add padding for spacing */
+  height: 60px; /* Make the card height adjust to content */
+}
+
+.profile-image {
+  width: 40px; /* Adjust the size of the profile image */
+  height: 40px; /* Make the image square */
+  border-radius: 50%; /* Make the profile image round */
+}
+
+.resume-name-and-email {
+  display: flex; /* Use flex to arrange name and rating vertically */
+  flex-direction: column; /* Arrange name and rating in a column */
+  font-size: 0.9rem;
+  margin: 0;
+  top: 0;
+  white-space: nowrap;
+  }
+
+.score{
+  border: 0.5px gray solid;
+  flex:1
+}
+
+.resumes-name {
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding: 0;
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  top:0
+}
+
+
+.gray {
+  color: gray;
+}
+
+.badge {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  background-color: rgb(255, 255, 255);
+  padding: 5px 7px;
+  border-radius: 2px;
+  font-weight: bold;
+  z-index: 5;
+  color: black;
+}
+
+.description {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* Rest of your existing CSS styles */

@@ -1,0 +1,55 @@
+/* DisplayFilteredResumeumes.css */
+
+.filter-superdiv{
+
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.upload-div{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    padding: 5px;
+    font-size: 16px;
+    padding: 4px;
+    border-radius: 5px;
+    border: none;
+}
+.filter-div{
+    border: 1px rgb(108, 108, 108) solid;
+    padding: 6px;
+    border-radius: 6px;
+}
+
+.uploadbtn {
+    background-color: rgb(147, 185, 232);
+    color: white;
+    border-radius: 5px;
+    padding: 4px;
+  }
+  
+.list{
+    background-color: rgb(1, 12, 24);
+    width: 100%;
+}
+  .items {
+    background-color: rgb(14, 125, 88);
+    border-bottom: 1px solid #ccc;
+    margin: 5px 0;
+    padding: 10px;
+  }
+  
+  .upload{
+    padding: 20px;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #3498db;
+    justify-self: center;
+  }

@@ -1,0 +1,118 @@
+@property --p{
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 1;
+  }
+  
+  .pie {
+    --p:20;
+    --b:22px;
+    --c:darkred;
+    --w:150px;
+  
+    width: var(--w);
+    aspect-ratio: 1;
+    position: relative;
+    display: inline-grid;
+    margin: 5px;
+    place-content: center;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: sans-serif;
+  }
+  .pie:before,
+  .pie:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+  }
+  .pie:before {
+    inset: 0;
+    background:
+      radial-gradient(farthest-side,var(--c) 98%,#0000) top/var(--b) var(--b) no-repeat,
+      conic-gradient(var(--c) calc(var(--p)*1%),#0000 0);
+    -webkit-mask: radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
+            mask: radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
+  }
+  .pie:after {
+    inset: calc(50% - var(--b)/2);
+    background: var(--c);
+    transform: rotate(calc(var(--p)*3.6deg)) translateY(calc(50% - var(--w)/2));
+  }
+  .animate {
+    animation: p 1s .5s both;
+  }
+  .no-round:before {
+    background-size: 0 0, auto;
+  }
+  .no-round:after {
+    content: none;
+  }
+  @keyframes p{
+    from{--p:0}
+  }
+
+  
+.hero-section{
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-section::-webkit-scrollbar{
+  display: none;
+}
+
+
+/* .hero-section>div {
+  position: relative;
+  width: 100%;
+  align-items: center;
+  
+  height: 400px;
+} */
+
+.hero-img{ 
+  filter: brightness(35%);
+  width: 100%;
+  height: 200%;
+  z-index: -3;
+  
+}
+
+.hero-img:hover{
+  filter: brightness(60%);
+}
+
+.main-heading{
+  /* background-color: antiquewhite; */
+  top: 17rem;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  position: absolute;
+  z-index: +2;
+  color: rgb(15, 14, 64);
+  font-weight: bold;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: min(6vw, 52px);
+  white-space: nowrap;
+  text-align: center;
+}
+
+.hero-para{
+  /* background-color: aqua; */
+  top: 22rem;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  position: absolute;
+  z-index: +2;
+  color: rgb(22, 24, 86);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: min(3vw,30px);
+  text-align: center;
+}
+
+.words{width: 100%;}
+
+
