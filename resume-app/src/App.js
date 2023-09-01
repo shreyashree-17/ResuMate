@@ -1,15 +1,15 @@
 // App.js
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useState } from "react";
-import Home from './pages/Home'
-import SharedLayout from './components/SharedLayout'
-import SharedResumeLayout from'./pages/SharedResumeLayout'
-import Resumes from './pages/Resumes'
+import Home from "./pages/Home";
+import SharedLayout from "./components/SharedLayout";
+import SharedResumeLayout from "./pages/SharedResumeLayout";
+import Resumes from "./pages/Resumes";
 import axios from "axios"; // Import Axios
-import Upload from './pages/Upload';
-import SingleResume from './pages/SingleResume';
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
+import Upload from "./pages/Upload";
+import SingleResume from "./pages/SingleResume";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 function App() {
   const [resumes, setResumes] = useState([]); // Define resumes state
@@ -33,7 +33,7 @@ function App() {
         // Assuming the backend sends back an array of extracted texts
         const extractedTexts = response.data;
         console.log("Received extracted texts:", extractedTexts); // Debug: Log the extracted texts
-        setResumes([...resumes, ...extractedTexts]);
+        setResumes(extractedTexts);
       })
       .catch((error) => {
         console.error(error);
@@ -55,15 +55,30 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<SharedLayout user={user}/>}>
+        <Route path="/" element={<SharedLayout user={user} />}>
           <Route index element={<Home />} />
-          <Route path='resumes' element={<SharedResumeLayout />}>
-            <Route index element={< Resumes filteredResumes={resumes} onFilter={handleFilter} />} />
-            <Route path=':resumeId' element={<SingleResume />} />
+          <Route path="resumes" element={<SharedResumeLayout />}>
+            <Route
+              index
+              element={
+                <Resumes filteredResumes={resumes} onFilter={handleFilter} />
+              }
+            />
+            <Route path=":resumeId" element={<SingleResume />} />
           </Route>
-          <Route path='upload' element={<Upload handleUpload={handleUpload} resumes={resumes} filteredResumes={filteredResumes} handleFilter={handleFilter} />} />
-          <Route path='login' element={<Login setUser={setUser}></Login>} />
-          <Route path='signup' element={<SignUp setUser={setUser}></SignUp>} />
+          <Route
+            path="upload"
+            element={
+              <Upload
+                handleUpload={handleUpload}
+                resumes={resumes}
+                filteredResumes={filteredResumes}
+                handleFilter={handleFilter}
+              />
+            }
+          />
+          <Route path="login" element={<Login setUser={setUser}></Login>} />
+          <Route path="signup" element={<SignUp setUser={setUser}></SignUp>} />
         </Route>
       </Routes>
     </BrowserRouter>
