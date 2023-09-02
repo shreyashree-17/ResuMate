@@ -1,0 +1,46 @@
+/* DisplayFilteredResumes.css */
+
+/* Style for the container */
+.resume-container {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+/* Style for each resume section */
+.resume-section {
+  margin-bottom: 20px;
+}
+
+/* Style for section headers */
+.resume-section h2 {
+  color: #333;
+  font-size: 20px;
+  margin: 0;
+}
+
+/* Style for individual resume items */
+.resume-item {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+/* Style for the entire resume content within a section */
+.resume-content {
+  margin-left: 20px;
+  padding-left: 10px;
+  border-left: 2px solid #007bff;
+}
+
+/* Style for the resume list */
+.resume-list {
+  list-style-type: disc; /* Use bullets for list items */
+  padding-left: 20px; /* Indent list items */
+}
+
+/* Style for list items */
+.resume-list li {
+  margin-bottom: 5px;
+}

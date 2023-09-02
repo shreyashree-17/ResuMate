@@ -18,11 +18,13 @@ const DisplayFilteredResumeumes = ({ resumes, onFilter }) => {
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
         />
-        <button className="uploadby" onClick={handleFilter}>Filter</button>
+        <button className="uploadby" onClick={handleFilter}>
+          Filter
+        </button>
         <ul>
-          {/* {resumes.map((resume, index) => (
+          {resumes.map((resume, index) => (
             <li key={index}>{resume}</li>
-          ))} */}
+          ))}
         </ul>
       </div>
     </div>

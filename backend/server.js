@@ -18,29 +18,16 @@ const mongoURI =
   "mongodb+srv://hall6:k6Q4sjTdJNnjQIRA@cluster0.au7bpfc.mongodb.net/?retryWrites=true&w=majority"; // Update with your MongoDB URI
 const dbName = "resumesdb"; // Update with your database name
 
-// storage engine for multer
-// const storageEngine = multer.diskStorage({
-//   destination: "./public/uploads/",
-//   filename: function (req, file, callback) {
-//     callback(
-//       null,
-//       file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-//     );
-//   },
-// });
-
-// const upload = multer({
-//   storage: storageEngine,
-// }).single("pdf");
-
 // Function to insert extracted text into MongoDB
 async function insertTextIntoMongoDB(
   text,
   education,
   skills,
   projects,
-  contact,
   experience,
+  achievements,
+  courses,
+  PORs,
   fileName
 ) {
   const client = new MongoClient(mongoURI, { useUnifiedTopology: true });
@@ -55,8 +42,10 @@ async function insertTextIntoMongoDB(
       education: education,
       skills: skills,
       projects: projects,
-      contact: contact,
       experience: experience,
+      achievements: achievements,
+      courses: courses,
+      PORs: PORs,
       fileName: fileName,
     };
 
@@ -76,7 +65,6 @@ app.post("/upload", (req, res) => {
   }
 
   const resume = req.files.resume;
-  var parsedText = {};
 
   console.log("Received uploaded file:", resume.name); // Debug: Log the received file name
 
@@ -101,21 +89,19 @@ app.post("/upload", (req, res) => {
           try {
             var parsedData = JSON.parse(extractedData);
             parsedText = parsedData;
-            // console.log("here");
-            // console.log(parsedData);
-            // You can now access the extracted data like parsedData.skills, parsedData.contact_no, parsedData.projects, etc.
-            // console.log("Education:", parsedData["academic qualifications"]);
-            // console.log("Achievements:", parsedData["scholastic achievements"]);
-            // console.log("Experience:", parsedData["experience"]);
-            // console.log("Projects:", parsedData["projects"]);
-            // console.log("Courses:", parsedData["relevant courses"]);
-            // console.log(
-            //   "Positions of Responsibility:",
-            //   parsedData["positions of responsibility"]
-            // );
             res.status(200).send(parsedData);
             // Insert the extracted text into MongoDB
-            // insertTextIntoMongoDB(parsedData.skills.join("\n"), resume.name);
+            insertTextIntoMongoDB(
+              extractedText,
+              parsedData["qualifications"],
+              parsedData["skills"],
+              parsedData["projects"],
+              parsedData["experience"],
+              parsedData["achievements"],
+              parsedData["courses"],
+              parsedData["positions of responsibility"],
+              resume.name
+            );
           } catch (error) {
             console.error("Error parsing JSON data:", error);
             res.status(500).send("Error processing the file.");
@@ -133,8 +119,6 @@ app.post("/upload", (req, res) => {
 });
 
 app.post("/filter", async (req, res) => {
-  //   console.log(req.body);
-  //   console.log(req);
   const keyword = req.body.filterword;
 
   const client = new MongoClient(mongoURI, { useUnifiedTopology: true });
@@ -161,4 +145,26 @@ app.post("/filter", async (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+});
+
+app.get("/get", async (req, res) => {
+  const client = new MongoClient(mongoURI, { useUnifiedTopology: true });
+
+  try {
+    await client.connect();
+    const db = client.db(dbName);
+    const collection = db.collection("resumes");
+
+    // Find documents that contain the keyword in their text
+    const cursor = collection.find();
+
+    const filteredTexts = await cursor.toArray();
+
+    res.status(200).json(filteredTexts);
+  } catch (error) {
+    console.error("Error filtering resumes:", error);
+    res.status(500).send("Error filtering resumes.");
+  } finally {
+    client.close();
+  }
 });

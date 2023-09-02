@@ -1,39 +1,29 @@
-import { Link } from "react-router-dom";
-import resumes from "../assets/data";
 import "./css/Resumes.css";
-import { Display } from "react-bootstrap-icons";
-import DisplayFilteredResumeumes from "../components/DisplayFilteredResumes";
+import React, { useState } from "react";
 
-const Resumes = (filteredResumes, onFilter) => {
+const Resumes = ({ resumes, onFilter }) => {
+  const [keyword, setKeyword] = useState("");
+
+  const handleFilter = () => {
+    onFilter(keyword);
+  };
   return (
-    <section className="section">
-      <div className="resumes">
-        <div className="filter">
-          <DisplayFilteredResumeumes
-            resumes={filteredResumes}
-            onFilter={onFilter}
-          />
-        </div>
-        {resumes.map((resume, index) => {
-          return (
-            <Link to={`/resumes/${resume.id}`} key={resume.id}>
-              <div className="card" key={resume.id}>
-                <div className="card-info">
-                  <div className="resume-name-and-email">
-                    <h5 className="resumes-name">{resume.name}</h5>
-                  </div>
-                </div>
-                <div className="score">{resume.name}</div>
-                <div className="score">{resume.name}</div>
-                <div className="score">{resume.name}</div>
-                <div className="score">{resume.name}</div>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-      <div className="clear"></div>
-    </section>
+    <div>
+      <input
+        type="text"
+        placeholder="Enter keyword to filter"
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
+      />
+      <button onClick={handleFilter}>Filter</button>
+      <ul>
+        {resumes.map((resume, index) => (
+          <li key={index}>
+            {resume.fileName} {resume.text}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

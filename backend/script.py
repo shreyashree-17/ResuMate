@@ -12,7 +12,7 @@ def extract_text_between_keywords(text, keywords):
                 start_keyword = keyword1.lower()
                 end_keyword = keyword2.lower()
                 pattern = rf"{re.escape(start_keyword)}(.*?){re.escape(end_keyword)}"
-                match = re.search(pattern, text.lower())
+                match = re.search(pattern, text, re.IGNORECASE)
 
                 if match:
                     divided_text[f"{start_keyword}"] = match.group(1).strip()
@@ -25,8 +25,9 @@ if __name__ == "__main__":
     resume_text = unicodedata.normalize('NFKD', resume_text)
     resume_text = resume_text.replace('\x96', '-')
     resume_text = resume_text.replace('\u0304', '-')  # Replace '\u0304' with a hyphen '-'
+    resume_text = resume_text.replace("•", "\\n")
 
-    keywords = ["Qualifications","Achievements", "Projects", "Skills","Courses","positions of responsibility", "experience", "skills", "education", "courses","projects", "achievements"]
+    keywords = ["Qualifications","Achievements", "Projects", "experience", "Skills","Courses","positions of responsibility",  "skills", "education", "courses","projects", "achievements"]
 
     # Divide the text by keywords
     divided_text = extract_text_between_keywords(resume_text, keywords)

@@ -18,8 +18,10 @@ const DisplayFilteredResumeumes = ({ resumes, onFilter }) => {
       />
       <button onClick={handleFilter}>Filter</button>
       <ul>
-        {resumes.map((resume, index) => (
-          <li key={index}>{resume}</li>
+        {resumes.map(([key, value]) => (
+          <li key={key}>
+            {value.fileName} {value.text}
+          </li>
         ))}
       </ul>
     </div>

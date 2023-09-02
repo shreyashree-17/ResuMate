@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useState } from "react";
 import Home from "./pages/Home";
 import SharedLayout from "./components/SharedLayout";
+import DisplayResumes from "./DisplayResumes";
 import SharedResumeLayout from "./pages/SharedResumeLayout";
 import Resumes from "./pages/Resumes";
 import axios from "axios"; // Import Axios
@@ -41,8 +42,11 @@ function App() {
   };
 
   const handleFilter = (keyword) => {
+    const formData = new FormData();
+    formData.append("filterword", keyword);
+
     axios
-      .post("http://localhost:5000/filter", { keyword })
+      .post("http://localhost:5000/filter", formData)
       .then((response) => {
         const filteredTexts = response.data;
         setFilteredResumes(filteredTexts);
@@ -52,20 +56,34 @@ function App() {
       });
   };
 
+  const getall = () => {
+    axios
+      .get("http://localhost:5000/get")
+      .then((response) => {
+        const resumedata = response.data;
+        setResumes(resumedata);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<SharedLayout user={user} />}>
           <Route index element={<Home />} />
-          <Route path="resumes" element={<SharedResumeLayout />}>
-            <Route
-              index
-              element={
-                <Resumes filteredResumes={resumes} onFilter={handleFilter} />
-              }
-            />
-            <Route path=":resumeId" element={<SingleResume />} />
-          </Route>
+          <Route
+            path="resumes"
+            index
+            element={<DisplayResumes resumes={resumes} onGet={getall} />}
+          />
+          <Route
+            path="filter"
+            index
+            element={
+              <Resumes resumes={filteredResumes} onFilter={handleFilter} />
+            }
+          />
           <Route
             path="upload"
             element={
