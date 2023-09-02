@@ -30,12 +30,6 @@ const Navbar = ({ user }) => {
         >
           Upload Resume
         </NavLink>
-        <NavLink
-          to="/login"
-          className={({ isActive }) => (isActive ? "link active" : "link")}
-        >
-          Login/SignUp
-        </NavLink>
       </div>
     </nav>
   );
